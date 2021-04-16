@@ -8,18 +8,24 @@ namespace Infrastructure.MoviesDataClient
     {
 
         private readonly HttpClient _httpClient;
+        private const string API_KEY = "720f1f9c1df65a0ff47c3efd52a055c2";
 
         public HttpDataClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<string> GetMovies(string query, int page)
+        public async Task<string> GetMoviesByName(string query, int page)
         {
-            const string API_KEY = "720f1f9c1df65a0ff47c3efd52a055c2";
-            string API_URL = $"search/movie?api_key={API_KEY}&language=es&query={query}&page={page}";
+            string URL = $"search/movie?api_key={API_KEY}&language=es&query={query}&page={page}";
+            var response = await _httpClient.GetAsync(URL);
+            return await response.Content.ReadAsStringAsync();
+        }
 
-            var response = await _httpClient.GetAsync(API_URL);
+        public async Task<string> GetPopularMovies(int page)
+        {
+            string URL = $"movie/popular?api_key={API_KEY}&language=es&page={page}";
+            var response = await _httpClient.GetAsync(URL);
             return await response.Content.ReadAsStringAsync();
         }
     }

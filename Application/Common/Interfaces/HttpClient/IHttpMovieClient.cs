@@ -7,6 +7,7 @@ namespace Application.Common.Interfaces.HttpClient
 {
     public interface IHttpMovieClient
     {
-        Task<string> GetMovies(string query, int page);
+        Task<string> GetMoviesByName(string query, int page);
+        Task<string> GetPopularMovies(int page);
     }
 }

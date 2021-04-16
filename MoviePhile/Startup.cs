@@ -3,7 +3,11 @@ using ApiNetCore.Middlewares;
 using Application.Auth;
 using Application.Common.Interfaces.Auth;
 using Application.Common.Interfaces.HttpClient;
+using Application.Common.Interfaces.Repository;
+using Application.Common.Interfaces.Services;
+using Application.Services;
 using Application.Services.Auth;
+using Domain.Common.Mapping;
 using Domain.Entities;
 using Infrastructure.MoviesDataClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -72,8 +76,14 @@ namespace MoviePhile
                .AddRoles<IdentityRole>()
                .AddEntityFrameworkStores<MoviePhileDbContext>();
 
+            // Inyección de Repositorios
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICommunityRepository, CommunityRepository>();
+
+            // Inyección de Servicios
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICommunityService, CommunityService>();
 
             services.AddControllers();
 
@@ -91,6 +101,9 @@ namespace MoviePhile
             {
                 c.BaseAddress = new Uri("https://api.themoviedb.org/3/");
             });
+
+            // Mapping for DTOs
+            services.AddAutoMapper(c => c.AddProfile<MappingProfile>(), typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

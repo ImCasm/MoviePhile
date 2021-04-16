@@ -8,7 +8,7 @@ namespace MoviePhile.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MoviesController : ControllerBase
     {
         private readonly IHttpMovieClient _httpClient;
@@ -18,10 +18,16 @@ namespace MoviePhile.Controllers
             _httpClient = httpClient;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Get(string query, int page = 1)
+        [HttpGet("search")]
+        public async Task<ActionResult> GetMoviesByName(string query, int page = 1)
         {
-            return Content(await _httpClient.GetMovies(query, page), "application/json");
+            return Content(await _httpClient.GetMoviesByName(query, page), "application/json");
+        }
+
+        [HttpGet("popular")]
+        public async Task<ActionResult> GetPopularMovies(int page = 1)
+        {
+            return Content(await _httpClient.GetPopularMovies(page), "application/json");
         }
     }
 }

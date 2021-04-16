@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(MoviePhileDbContext))]
-    partial class MoviePhileDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412020213_DatabaseEntities")]
+    partial class DatabaseEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,14 +242,9 @@ namespace Persistence.Migrations
                     b.Property<int>("PublicationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PublicationId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("PublicationComments");
                 });
@@ -612,13 +609,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Publication");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Score", b =>

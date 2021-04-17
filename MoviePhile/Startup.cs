@@ -83,6 +83,7 @@ namespace MoviePhile
 
             // Inyección de Servicios
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IHttpMovieClientService, HttpMovieClientService>();
             services.AddScoped<ICommunityService, CommunityService>();
 
             services.AddControllers();

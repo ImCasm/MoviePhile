@@ -1,4 +1,4 @@
-﻿using Application.Common.Interfaces.HttpClient;
+﻿using Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,23 +11,23 @@ namespace MoviePhile.Controllers
     [Route("api/[controller]")]
     public class MoviesController : ControllerBase
     {
-        private readonly IHttpMovieClient _httpClient;
+        private readonly IHttpMovieClientService _httpClientService;
 
-        public MoviesController(IHttpMovieClient httpClient)
+        public MoviesController(IHttpMovieClientService httpClientService)
         {
-            _httpClient = httpClient;
+            _httpClientService = httpClientService;
         }
 
         [HttpGet("search")]
         public async Task<ActionResult> GetMoviesByName(string query, int page = 1)
         {
-            return Content(await _httpClient.GetMoviesByName(query, page), "application/json");
+            return Content(await _httpClientService.GetMoviesByName(query, page), "application/json");
         }
 
         [HttpGet("popular")]
         public async Task<ActionResult> GetPopularMovies(int page = 1)
         {
-            return Content(await _httpClient.GetPopularMovies(page), "application/json");
+            return Content(await _httpClientService.GetPopularMovies(page), "application/json");
         }
     }
 }

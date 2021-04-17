@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace ApiNetCore.Middlewares
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
@@ -46,7 +45,7 @@ namespace ApiNetCore.Middlewares
                 case Exception e:
                     logger.LogError(ex, "Error de servidor");
                     errors = string.IsNullOrWhiteSpace(e.Message) ? "Error" : e.Message;
-                    httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    httpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
                     break;
             }
 

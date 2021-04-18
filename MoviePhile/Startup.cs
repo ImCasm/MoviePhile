@@ -45,7 +45,7 @@ namespace MoviePhile
 
             // Conf EF with SQL Server
             services.AddDbContext<MoviePhileDbContext>(
-                opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
+                opt => opt.UseSqlServer(Configuration.GetConnectionString("AzureConnection")
             ));
 
             // within this section we are configuring the authentication and setting the default scheme

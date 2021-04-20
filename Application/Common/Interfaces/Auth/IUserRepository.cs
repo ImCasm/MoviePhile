@@ -30,10 +30,10 @@ namespace Application.Common.Interfaces.Auth
 
 
         /// <summary>
-        /// 
+        /// Crea el usuario en la base de datos
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="password"></param>
+        /// <param name="user">Objeto usuario con sus datos</param>
+        /// <param name="password">Contraseña del usuario</param>
         /// <returns></returns>
         Task<IdentityResult> CreateUser(User user, string password);
     }

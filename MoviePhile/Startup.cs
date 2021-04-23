@@ -80,11 +80,15 @@ namespace MoviePhile
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICommunityRepository, CommunityRepository>();
+            //filmcomment
+            services.AddScoped<IFilmCommentRepository, FilmCommentRepository>();
 
             // Inyección de Servicios
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IHttpMovieClientService, HttpMovieClientService>();
             services.AddScoped<ICommunityService, CommunityService>();
+            //filmcommentServicio
+            services.AddScoped<IFilmCommentService, FilmCommentService>();
 
             services.AddControllers();
 

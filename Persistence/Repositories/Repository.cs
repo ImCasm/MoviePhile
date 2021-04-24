@@ -59,7 +59,7 @@ namespace Persistence.Repositories
                 return entity;
             }
 
-            throw new ExceptionHandler(
+            throw new HandlerException(
                 HttpStatusCode.InternalServerError,
                 new List<string>() {
                     "Ha ocurrido un error al intentar insertar los datos."
@@ -77,7 +77,7 @@ namespace Persistence.Repositories
                 return modifiedEntity;
             }
 
-            throw new ExceptionHandler(
+            throw new HandlerException(
                 HttpStatusCode.InternalServerError,
                 new List<string>() {
                     "Ha ocurrido un error al intentar actualizar los datos."
@@ -105,7 +105,7 @@ namespace Persistence.Repositories
                 code = HttpStatusCode.InternalServerError;
             }
 
-            throw new ExceptionHandler(
+            throw new HandlerException(
                 code,
                 new List<string>() {
                     error

@@ -47,7 +47,7 @@ namespace Application.Services.Auth
                 }
 
 
-                throw new ExceptionHandler(
+                throw new HandlerException(
                     HttpStatusCode.Unauthorized,
                     new List<string>() {
                         "El usuario/password son incorrectos."
@@ -55,7 +55,7 @@ namespace Application.Services.Auth
                 );
             }
 
-            throw new ExceptionHandler(
+            throw new HandlerException(
                 HttpStatusCode.NotFound,
                 new List<string>() {
                     "El usuario no se encuentra en el sistema."
@@ -91,7 +91,7 @@ namespace Application.Services.Auth
                 };
             }
 
-            throw new ExceptionHandler(
+            throw new HandlerException(
                 HttpStatusCode.InternalServerError,
                 isCreated.Errors.Select(x => x.Description).ToList()
             );

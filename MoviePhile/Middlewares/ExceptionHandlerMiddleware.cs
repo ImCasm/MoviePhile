@@ -25,7 +25,7 @@ namespace ApiNetCore.Middlewares
             {
                 await _next(httpContext);
             }
-            catch (ExceptionHandler ex)
+            catch (HandlerException ex)
             {
                 await ExceptionHandlerAsync(httpContext, ex, _logger);
             }
@@ -34,18 +34,19 @@ namespace ApiNetCore.Middlewares
         private async Task ExceptionHandlerAsync(HttpContext httpContext, Exception ex, ILogger<ExceptionHandlerMiddleware> logger)
         {
             object errors = null;
+            int status = (int)HttpStatusCode.InternalServerError;
 
             switch (ex)
             {
-                case ExceptionHandler e:
+                case HandlerException e:
                     logger.LogError(ex, "Error Handler");
                     errors = e.Errors;
-                    httpContext.Response.StatusCode = (int)e.Code;
+                    httpContext.Response.StatusCode = status = (int)e.Code;
                     break;
                 case Exception e:
                     logger.LogError(ex, "Error de servidor");
                     errors = string.IsNullOrWhiteSpace(e.Message) ? "Error" : e.Message;
-                    httpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                    httpContext.Response.StatusCode = status;
                     break;
             }
 
@@ -53,7 +54,7 @@ namespace ApiNetCore.Middlewares
 
             if (errors != null)
             {
-                var result = JsonSerializer.Serialize(new { errors });
+                var result = JsonSerializer.Serialize(new { status, errors });
                 await httpContext.Response.WriteAsync(result);
             }
         }

@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.Dto
 {
-    public abstract class Film
+    public class FilmDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -12,9 +16,8 @@ namespace Domain.Entities
         public string PosterPath { get; set; }
         public float Popularity { get; set; }
         public float VoteAverage { get; set; }
-        public int GenreId { get; set; }
 
-        public Genre Genre { get; set; }
-        public ICollection<FilmComment> Comments { get; set; }
+        public GenreDto Genre { get; set; }
+        public ICollection<FilmCommentDto> Comments { get; set; }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces.Repository
 {
     public interface ICommunityRepository : IRepository<Community>
     {
+        /// <summary>
+        /// Obtiene la lista de comunidades desde la base de datos
+        /// </summary>
+        /// <returns>Lista de comunidades</returns>
         Task<IEnumerable<Community>> GetCommunities();
     }
 }

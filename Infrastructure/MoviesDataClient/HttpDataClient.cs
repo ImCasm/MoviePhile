@@ -1,4 +1,7 @@
 ﻿using Application.Common.Interfaces.HttpClient;
+using Domain.Common.Exceptions;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -27,6 +30,56 @@ namespace Infrastructure.MoviesDataClient
             string URL = $"movie/popular?api_key={API_KEY}&language=es&page={page}";
             var response = await _httpClient.GetAsync(URL);
             return await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<string> GetMovieById(int id)
+        {
+            string URL = $"movie/{id}?api_key={API_KEY}&language=es";
+            var response = await _httpClient.GetAsync(URL);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            throw new HandlerException(
+                response.StatusCode,
+                new List<string>() {
+                    await response.Content.ReadAsStringAsync()
+                }
+            );
+        }
+
+        public async Task<string> GetSeriesByName(string query, int page)
+        {
+            string URL = $"search/tv?api_key={API_KEY}&language=es&query={query}&page={page}";
+            var response = await _httpClient.GetAsync(URL);
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<string> GetPopularSeries(int page)
+        {
+            string URL = $"tv/popular?api_key={API_KEY}&language=es&page={page}";
+            var response = await _httpClient.GetAsync(URL);
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<string> GetSerieById(int id)
+        {
+            string URL = $"tv/{id}?api_key={API_KEY}&language=es";
+            var response = await _httpClient.GetAsync(URL);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            throw new HandlerException(
+                response.StatusCode,
+                new List<string>() {
+                    await response.Content.ReadAsStringAsync()
+                }
+            );
         }
     }
 }

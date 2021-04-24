@@ -23,10 +23,10 @@ namespace Application.Common.Interfaces.Auth
         /// <summary>
         /// Verifica si las credenciales para el inicio de sesión del usuario son correctas
         /// </summary>
-        /// <param name="email">Email del usuario</param>
+        /// <param name="user">Email del usuario</param>
         /// <param name="password">Contraseña del usuario</param>
         /// <returns></returns>
-        Task<bool> CheckCredentials(User email, string password);
+        Task<bool> CheckCredentials(User user, string password);
 
 
         /// <summary>

@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public float Value { get; set; }
-        public int MovieId { get; set; }
+        public int FilmId { get; set; }
         public string UserId { get; set; }
 
         public Film Film { get; set; }

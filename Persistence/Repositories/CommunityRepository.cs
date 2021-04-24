@@ -22,7 +22,6 @@ namespace Persistence.Repositories
         public async Task<IEnumerable<Community>> GetCommunities()
         {
             return await _context.Communities
-                .Include(c => c.Genres)
                 .Include(c => c.Publications)
                 .ThenInclude(p => p.Comments)
                 .ThenInclude(c => c.User)

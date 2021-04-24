@@ -27,6 +27,9 @@ namespace Persistence
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<Film>().Property(f => f.Id).ValueGeneratedNever();
+            builder.Entity<Genre>().Property(g => g.Id).ValueGeneratedNever();
+
             //Relaciona las  clases hijas con la clase padre para mapear con la DB
             builder.Entity<Movie>().HasBaseType<Film>();
             builder.Entity<TvShow>().HasBaseType<Film>();

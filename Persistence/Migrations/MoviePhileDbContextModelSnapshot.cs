@@ -85,9 +85,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Film", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("BackdropPath")
                         .HasColumnType("nvarchar(max)");
@@ -95,6 +93,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
 
                     b.Property<string>("HomePage")
                         .HasColumnType("nvarchar(max)");
@@ -153,24 +154,12 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Genre", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CommunityId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FilmId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommunityId");
-
-                    b.HasIndex("FilmId");
 
                     b.ToTable("Genres");
                 });
@@ -259,10 +248,7 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FilmId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
+                    b.Property<int>("FilmId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -496,6 +482,8 @@ namespace Persistence.Migrations
                     b.Property<int>("RunTime")
                         .HasColumnType("int");
 
+                    b.HasIndex("GenreId");
+
                     b.HasDiscriminator().HasValue("Movie");
                 });
 
@@ -511,6 +499,8 @@ namespace Persistence.Migrations
 
                     b.Property<int>("NumberOfSeasons")
                         .HasColumnType("int");
+
+                    b.HasIndex("GenreId");
 
                     b.HasDiscriminator().HasValue("TvShow");
                 });
@@ -576,17 +566,6 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Genre", b =>
-                {
-                    b.HasOne("Domain.Entities.Community", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("CommunityId");
-
-                    b.HasOne("Domain.Entities.Film", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("FilmId");
-                });
-
             modelBuilder.Entity("Domain.Entities.Publication", b =>
                 {
                     b.HasOne("Domain.Entities.Community", "Community")
@@ -625,7 +604,9 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.Film", "Film")
                         .WithMany()
-                        .HasForeignKey("FilmId");
+                        .HasForeignKey("FilmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany()
@@ -687,10 +668,30 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Entities.Movie", b =>
+                {
+                    b.HasOne("Domain.Entities.Genre", "Genre")
+                        .WithMany("Movies")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("Domain.Entities.TvShow", b =>
+                {
+                    b.HasOne("Domain.Entities.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Genre");
+                });
+
             modelBuilder.Entity("Domain.Entities.Community", b =>
                 {
-                    b.Navigation("Genres");
-
                     b.Navigation("Publications");
 
                     b.Navigation("Users");
@@ -699,8 +700,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Film", b =>
                 {
                     b.Navigation("Comments");
+                });
 
-                    b.Navigation("Genres");
+            modelBuilder.Entity("Domain.Entities.Genre", b =>
+                {
+                    b.Navigation("Movies");
                 });
 
             modelBuilder.Entity("Domain.Entities.Publication", b =>

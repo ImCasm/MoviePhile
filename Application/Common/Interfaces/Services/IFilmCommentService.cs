@@ -9,7 +9,17 @@ namespace Application.Common.Interfaces.Services
 {
     public interface IFilmCommentService
     {
-       public Task<bool> SetComment(FilmComment filmComment);
+
+        /*
+         * Almacenar un comentario en la base de datos
+         */
+        public Task<bool> SetComment(FilmComment filmComment);
+
+
+        /*
+         *Todos los comentarios almacenados en la base de datos refentes a una pelicula especifica 
+         */
+        public Task<IEnumerable<FilmComment>> GetAllComment(int IdFilm);
 
     }
 }

@@ -14,10 +14,16 @@ namespace Application.Services
         {
             _repository = repository;
         }
+              
 
-         public async Task<bool> SetComment(FilmComment filmComment)
+        public async Task<bool> SetComment(FilmComment filmComment)
         {
             return  await _repository.SetFilmComment(filmComment);
+        }
+
+        public async Task<IEnumerable<FilmComment>> GetAllComment(int IdFilm)
+        {
+            return await _repository.GetAllComment(IdFilm);
         }
     }
 }

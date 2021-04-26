@@ -28,7 +28,15 @@ namespace MoviePhile.Controllers
         {
             return Ok(await _filmCommentService.SetComment(comment));
         }
-            
+
+
+        [HttpGet]
+        [Route("AllCommentFilm")]
+        public async Task<IActionResult> AllCommentFilm(int IdFilm)
+        {
+            return Ok(await _filmCommentService.GetAllComment(IdFilm));
+        }
+
 
 
     }

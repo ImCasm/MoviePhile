@@ -76,19 +76,26 @@ namespace MoviePhile
                .AddRoles<IdentityRole>()
                .AddEntityFrameworkStores<MoviePhileDbContext>();
 
-            // Inyección de Repositorios
+            // InyecciÃ³n de Repositorios
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICommunityRepository, CommunityRepository>();
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<ISerieRepository, SerieRepository>();
+            //filmcomment
+            services.AddScoped<IFilmCommentRepository, FilmCommentRepository>();
 
-            // Inyección de Servicios
+            // InyecciÃ³n de Servicios
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IHttpMovieClientService, HttpMovieClientService>();
             services.AddScoped<ICommunityService, CommunityService>();
+
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<ISerieService, SerieService>();
+
+            //filmcommentServicio
+            services.AddScoped<IFilmCommentService, FilmCommentService>();
+
 
             services.AddControllers();
 

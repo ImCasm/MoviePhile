@@ -24,7 +24,10 @@ namespace Application.Services
 
             if (dbMovie == null)
             {
-                dynamic apiMovie = JObject.Parse(await _httpClientService.GetMovieById(id));
+
+                string stringMovie = await _httpClientService.GetMovieById(id);
+
+                dynamic apiMovie = JObject.Parse(stringMovie);
 
                 dbMovie = GetMovieFromJson(apiMovie);
             }

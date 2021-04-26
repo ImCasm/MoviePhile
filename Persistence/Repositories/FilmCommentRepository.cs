@@ -34,7 +34,6 @@ namespace Persistence.Repositories
         {
             return await _context.FilmComments
                 .Include(fc => fc.Film)
-                .ThenInclude(f => f.Genres)
                 .Include(fc=>fc.User)
                 .ToListAsync();
 

@@ -1,12 +1,19 @@
 ﻿using Application.Common.Interfaces.Services;
 using Application.Dto;
-using Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using AutoMapper;
+using System.Collections.Generic;
+
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+
+
+
 
 namespace MoviePhile.Controllers
 {
@@ -17,9 +24,11 @@ namespace MoviePhile.Controllers
     {
 
         private readonly IFilmCommentService _filmCommentService;
-        public FilmCommentControllerBase(IFilmCommentService filmComment)
+        private readonly IMapper _mapper;
+        public FilmCommentControllerBase(IFilmCommentService filmComment, IMapper mapper)
         {
             _filmCommentService = filmComment;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -34,7 +43,10 @@ namespace MoviePhile.Controllers
         [Route("AllCommentFilm")]
         public async Task<IActionResult> AllCommentFilm(int IdFilm)
         {
-            return Ok(await _filmCommentService.GetAllComment(IdFilm));
+            var allFilmComment = await _filmCommentService.GetAllComment(IdFilm);
+            //return Ok(_mapper.Map<IEnumerable<FilmCommentDto>>(allFilmComment));
+            return Ok(allFilmComment);
+
         }
 
 

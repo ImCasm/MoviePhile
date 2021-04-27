@@ -33,8 +33,7 @@ namespace Persistence.Repositories
         public async Task<IEnumerable<FilmComment>> GetAllComment(int IdFilm)
         {
             return await _context.FilmComments
-                .Include(fc => fc.Film)
-                .Include(fc=>fc.User)
+                .Include(c=> c.User)
                 .ToListAsync();
 
 

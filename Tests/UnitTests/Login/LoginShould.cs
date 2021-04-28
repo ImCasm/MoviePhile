@@ -3,7 +3,6 @@ using Application.Common.Interfaces.Auth;
 using Application.Dto;
 using Application.Services.Auth;
 using Domain.Common.Exceptions;
-using Domain.Entities;
 using Microsoft.Extensions.Options;
 using Tests.UnitTests.Login.Mocks;
 using Xunit;
@@ -30,6 +29,10 @@ namespace Tests.UnitTests.Login
             _authService = new AuthService(_userRepository.Object, om);
         }
 
+        /// <summary>
+        /// Prueba que inicia sesión con un usuario correctamente
+        /// Verifica que el JWT se haya devuelto satisfactoriamente
+        /// </summary>
         [Fact]
         public async void LoginUserSuccess()
         {
@@ -46,8 +49,12 @@ namespace Tests.UnitTests.Login
             Assert.NotEmpty(user.Token);
         }
 
+        /// <summary>
+        /// Prueba que inicia sesión con un usuario con datos incorrectos
+        /// Verifica que se lanza la excepción personalizada
+        /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task LoginUserFailPassword()
+        public async void LoginUserFailPassword()
         {
             // Arrange
             UserLoginRequestDto userLogin = new UserLoginRequestDto()
@@ -62,8 +69,12 @@ namespace Tests.UnitTests.Login
             await Assert.ThrowsAsync<HandlerException>(() => _authService.Login(userLogin));
         }
 
+        /// <summary>
+        /// Prueba de iniciar sesión con un usuario que su email no exista en la base de datos
+        /// Verifica que se lance una excepción personalizada
+        /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task LoginUserFailEmail()
+        public async void LoginUserFailEmail()
         {
             // Arrange
             UserLoginRequestDto userLogin = new UserLoginRequestDto()

@@ -21,6 +21,10 @@ namespace Tests.UnitTests.SearchMovie
             movieService = new MovieService(httpMovieService.Object, movieRepository.Object);
         }
 
+        /// <summary>
+        /// Prueba de trae una película de la base de datos
+        /// Verifica que no sea null
+        /// </summary>
         [Fact]
         public async void SearchMovieByIdFromDb()
         {
@@ -34,6 +38,10 @@ namespace Tests.UnitTests.SearchMovie
             Assert.NotNull(movie);
         }
 
+        /// <summary>
+        /// Prueba de traer película por id desde la API externa
+        /// Verifica que no sea null
+        /// </summary>
         [Fact]
         public async void SearchMovieByIdFromApi()
         {
@@ -47,6 +55,10 @@ namespace Tests.UnitTests.SearchMovie
             Assert.NotNull(movie);
         }
 
+        /// <summary>
+        /// Prueba que trae lista de películas desde la API externa
+        /// Verifica que la primer película de la lista sea la esperada
+        /// </summary>
         [Fact]
         public async void SearchMoviesByName()
         {
@@ -61,6 +73,10 @@ namespace Tests.UnitTests.SearchMovie
             Assert.Equal("Mortal Kombat", moviesJson[0]["title"]);
         }
 
+        /// <summary>
+        /// Prueba que trae la lista de películas porpulares de la API externa
+        /// Verifica que la lista no esté vacía
+        /// </summary>
         [Fact]
         public async void SearchPopularMovies()
         {

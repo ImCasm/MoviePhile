@@ -47,5 +47,17 @@ namespace Application.Common.Interfaces.Services
         /// <param name="id">Id de la serie</param>
         /// <returns>La serie encontrada</returns>
         Task<string> GetSerieById(int id);
+
+        /// <summary>
+        /// Obtiene la lista de generos de las peliculas
+        /// </summary>
+        /// <returns>Lista de generos en formato JSON</returns>
+        Task<string> GetAllMovieGenres();
+
+        /// <summary>
+        /// Obtiene la lista de generos de las series
+        /// </summary>
+        /// <returns>Lista de generos en formato JSON</returns>
+        Task<string> GetAllSeriesGenres();
     }
 }

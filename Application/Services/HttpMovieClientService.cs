@@ -1,6 +1,5 @@
 ﻿using Application.Common.Interfaces.HttpClient;
 using Application.Common.Interfaces.Services;
-using Domain.Entities;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -12,6 +11,16 @@ namespace Application.Services
         public HttpMovieClientService(IHttpMovieClient httpClient)
         {
             _httpClient = httpClient;
+        }
+
+        public async Task<string> GetAllMovieGenres()
+        {
+            return await _httpClient.GetAllMovieGenres();
+        }
+
+        public async Task<string> GetAllSeriesGenres()
+        {
+            return await _httpClient.GetAllSeriesGenres();
         }
 
         public async Task<string> GetMovieById(int id)

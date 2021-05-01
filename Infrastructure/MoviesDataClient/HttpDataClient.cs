@@ -81,5 +81,41 @@ namespace Infrastructure.MoviesDataClient
                 }
             );
         }
+
+        public async Task<string> GetAllMovieGenres()
+        {
+            string URL = $"genre/movie/list?api_key={API_KEY}&language=es";
+            var response = await _httpClient.GetAsync(URL);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            throw new HandlerException(
+                response.StatusCode,
+                new List<string>() {
+                    await response.Content.ReadAsStringAsync()
+                }
+            );
+        }
+
+        public async Task<string> GetAllSeriesGenres()
+        {
+            string URL = $"genre/tv/list?api_key={API_KEY}&language=es";
+            var response = await _httpClient.GetAsync(URL);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            throw new HandlerException(
+                response.StatusCode,
+                new List<string>() {
+                    await response.Content.ReadAsStringAsync()
+                }
+            );
+        }
     }
 }

@@ -37,5 +37,12 @@ namespace Application.Common.Interfaces.Services
        /// <param name="movie">Película que se va a guardar</param>
        /// <returns>Película encontrada</returns>
         Task<Movie> InsertMovie(Movie movie);
+
+        /// <summary>
+        /// Verifica si la pelicula con un id dado existe en la base de datos
+        /// </summary>
+        /// <param name="id">Id de la película a verificar</param>
+        /// <returns>true si existe en la base de datos, false en otro caso</returns>
+        Task<bool> ExistMovieOnDb(int id);
     }
 }

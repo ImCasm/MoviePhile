@@ -35,6 +35,26 @@ namespace Application.Services
             return dbMovie;
         }
 
+        public async Task<string> GetMoviesByName(string query, int page = 1)
+        {
+            return await _httpClientService.GetMoviesByName(query, page);
+        }
+
+        public async Task<string> GetPopularMovies(int page = 1)
+        {
+            return await _httpClientService.GetPopularMovies(page);
+        }
+
+        public async Task<Movie> InsertMovie(Movie movie)
+        {
+            return await _movieRepository.InsertMovie(movie);
+        }
+
+        public async Task<bool> ExistMovieOnDb(int id)
+        {
+            return await _movieRepository.GetMovieById(id) != null;
+        }
+
         private Movie GetMovieFromJson(dynamic apiMovie)
         {
             return new Movie
@@ -58,21 +78,6 @@ namespace Application.Services
                 Title = apiMovie.title,
                 VoteAverage = apiMovie.vote_average
             };
-        }
-
-        public async Task<string> GetMoviesByName(string query, int page = 1)
-        {
-            return await _httpClientService.GetMoviesByName(query, page);
-        }
-
-        public async Task<string> GetPopularMovies(int page = 1)
-        {
-            return await _httpClientService.GetPopularMovies(page);
-        }
-
-        public async Task<Movie> InsertMovie(Movie movie)
-        {
-            return await _movieRepository.InsertMovie(movie);
         }
     }
 }

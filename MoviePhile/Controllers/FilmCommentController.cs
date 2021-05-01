@@ -1,38 +1,25 @@
 ﻿using Application.Common.Interfaces.Services;
-using Application.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using AutoMapper;
-using System.Collections.Generic;
-
-using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-
 
 namespace MoviePhile.Controllers
 {
 
     [Route("api/[controller]")]
     [ApiController]
-    public class FilmCommentControllerBase : ControllerBase
+    public class FilmCommentController : ControllerBase
     {
 
         private readonly IFilmCommentService _filmCommentService;
         private readonly IMapper _mapper;
-        public FilmCommentControllerBase(IFilmCommentService filmComment, IMapper mapper)
+        public FilmCommentController(IFilmCommentService filmComment, IMapper mapper)
         {
             _filmCommentService = filmComment;
             _mapper = mapper;
         }
         // Post: api/<CommentFilmController>
         [HttpPost]
-        [Route("CommentFilm")]
         public async Task<IActionResult> CommentFilm([FromBody] Domain.Entities.FilmComment comment)
         {
             return Ok(await _filmCommentService.SetComment(comment));

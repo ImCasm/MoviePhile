@@ -25,6 +25,7 @@ namespace Persistence.Repositories
 
         public async Task<Movie> InsertMovie(Movie movie)
         {
+            movie.Genre = null;
             return await Insert(movie);
         }
     }

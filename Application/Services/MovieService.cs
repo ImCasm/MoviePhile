@@ -62,6 +62,7 @@ namespace Application.Services
                 Id = apiMovie.id,
                 BackdropPath = apiMovie.backdrop_path,
                 Budget = apiMovie.budget,
+                GenreId = apiMovie.genres[0].id,
                 Genre = new Genre
                 {
                     Id = apiMovie.genres[0].id,

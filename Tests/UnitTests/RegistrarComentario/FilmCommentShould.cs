@@ -2,21 +2,29 @@ using Application.Common.Interfaces.Services;
 using Application.Services;
 using Domain.Entities;
 using Newtonsoft.Json.Linq;
+using Tests.UnitTests.RegistrarComentario.Mocks;
 using Tests.UnitTests.SearchMovie.Mocks;
 using Xunit;
 
-namespace Tests.UnitTests.SearchMovie
+namespace Tests.UnitTests.RegistrarComentario
 {
     public class FilmCommentShould
     {
 
         private readonly FilmCommentRepositoryMock filmCommentRepository;
+        private readonly MovieRepositoryMock movieRepository;
+        private readonly HttpMovieClientServiceMock httpMovieService;
         private readonly IFilmCommentService filmCommenService;
+        private readonly IMovieService movieService;
 
         public FilmCommentShould()
         {
+            httpMovieService = new HttpMovieClientServiceMock();
+            movieRepository = new MovieRepositoryMock();
             filmCommentRepository = new FilmCommentRepositoryMock();
-            filmCommenService = new FilmCommentService(filmCommentRepository.Object);
+
+            movieService = new MovieService(httpMovieService.Object, movieRepository.Object);
+            filmCommenService = new FilmCommentService(filmCommentRepository.Object, movieService);
         }
 
         [Fact]

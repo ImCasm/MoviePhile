@@ -11,5 +11,7 @@ namespace Application.Common.Interfaces.Services
         /// </summary>
         /// <returns>Lista de comunidades</returns>
         Task<IEnumerable<Community>> GetCommunities();
+        Task<Community> GetCommunityByName(string name);
+
     }
 }

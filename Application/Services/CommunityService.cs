@@ -22,5 +22,11 @@ namespace Application.Services
         {
             return await _repository.GetCommunities();
         }
+
+        public async Task<Community> GetCommunityByName(string name)
+        {
+            return await _repository.GetCommunityByname(name);
+          
+        }
     }
 }

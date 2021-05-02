@@ -28,5 +28,13 @@ namespace MoviePhile.Controllers
             var communities = await _communityService.GetCommunities();
             return Ok(_mapper.Map<IEnumerable<CommunityDto>>(communities));
         }
+
+        [HttpGet("{name}")]
+        public async Task<ActionResult> GetByName(string name)
+        {
+            var comunitie = await _communityService.GetCommunityByName(name);
+            return Ok(_mapper.Map<CommunityDto>(comunitie));
+        }
     }
+    
 }

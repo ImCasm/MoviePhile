@@ -11,5 +11,6 @@ namespace Application.Common.Interfaces.Repository
         /// </summary>
         /// <returns>Lista de comunidades</returns>
         Task<IEnumerable<Community>> GetCommunities();
+        Task<Community> GetCommunityByname(string name);
     }
 }

@@ -28,5 +28,20 @@ namespace Persistence.Repositories
                 .ThenInclude(u => u.User)
                 .ToListAsync();
         }
+
+        public async Task<Community> GetCommunityByname(string name)
+        {
+            
+            return(await _context.Communities
+                .Include(c => c.Publications)
+                .ThenInclude(p => p.Comments)
+                .ThenInclude(c => c.User)
+                .Include(c => c.Users)
+                .ThenInclude(u => u.Community)
+                .Include(c => c.Users)
+                .ThenInclude(u => u.User)
+                .FirstOrDefaultAsync(f => f.Name == name));
+            
+        }
     }
 }

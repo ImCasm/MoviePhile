@@ -1,8 +1,10 @@
 ﻿using Application.Common.Interfaces.Repository;
 using Application.Common.Interfaces.Services;
+using Domain.Common.Exceptions;
 using Domain.Entities;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -47,7 +49,18 @@ namespace Application.Services
 
         public async Task<Movie> InsertMovie(Movie movie)
         {
-            return await _movieRepository.InsertMovie(movie);
+            if (movie != null && movie.Id > 0 && movie.GenreId > 0)
+            {
+                movie.Genre = null;
+                return await _movieRepository.InsertMovie(movie);
+            }
+
+            throw new HandlerException(
+                HttpStatusCode.BadRequest,
+                new List<string>() {
+                    "Los datos del objeto de película son incorrectos."
+                }
+            );
         }
 
         public async Task<bool> ExistMovieOnDb(int id)

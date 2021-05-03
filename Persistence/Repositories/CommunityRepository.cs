@@ -52,13 +52,15 @@ namespace Persistence.Repositories
 
             return await _context.Communities
                 .Include(c => c.Publications)
-                    .ThenInclude(p => p.Comments)
-                        .ThenInclude(c => c.User)
+                .ThenInclude(p => p.Comments)
+                .ThenInclude(c => c.User)
                 .Include(c => c.Users)
-                    .ThenInclude(u => u.Community)
-                        .Include(c => c.Users)
-                            .ThenInclude(u => u.User).Where(
-              f => f.Name.Contains(nameCommunity) )
+                .ThenInclude(u => u.Community)
+                .Include(c => c.Users)
+                .ThenInclude(u => u.User)
+                .Where(f => f.Name.ToUpper()
+                    .Contains(nameCommunity.ToUpper()) 
+                )
                 .ToListAsync();
 
         }

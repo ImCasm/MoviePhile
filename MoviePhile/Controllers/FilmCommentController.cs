@@ -18,14 +18,13 @@ namespace MoviePhile.Controllers
             _filmCommentService = filmComment;
             _mapper = mapper;
         }
-        // Post: api/<CommentFilmController>
+        
         [HttpPost]
         public async Task<IActionResult> CommentFilm([FromBody] Domain.Entities.FilmComment comment)
         {
             return Ok(await _filmCommentService.SetComment(comment));
         }
 
-        // GET: api/<AllCommentFilmController>
         [HttpGet]
         [Route("AllCommentFilm")]
         public async Task<IActionResult> AllCommentFilm(int IdFilm)
@@ -35,8 +34,5 @@ namespace MoviePhile.Controllers
             return Ok(allFilmComment);
 
         }
-
-
-
     }
 }

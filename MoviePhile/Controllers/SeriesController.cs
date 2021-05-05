@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces.Services;
 using Application.Dto;
 using AutoMapper;
+using Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,12 @@ namespace MoviePhile.Controllers
         public async Task<ActionResult> GetSerieId(int serieId)
         {
             return Ok(_mapper.Map<TvShowDto>(await _seriesService.GetSerieById(serieId)));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> InsertSerie(TvShow serie)
+        {
+            return Ok(_mapper.Map<MovieDto>(await _seriesService.InsertSerie(serie)));
         }
     }
 }

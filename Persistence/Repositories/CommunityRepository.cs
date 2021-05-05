@@ -58,11 +58,27 @@ namespace Persistence.Repositories
                     .ThenInclude(u => u.Community)
                         .Include(c => c.Users)
                             .ThenInclude(u => u.User).Where(
-              f => f.Name.Contains(nameCommunity) )
+              f => f.Name.Contains(nameCommunity))
                 .ToListAsync();
 
         }
+        public async Task<Community> Get_CommunityByname(string name)
+        {
 
+            return (await _context.Communities
+                .FirstOrDefaultAsync(f => f.Name == name));
 
+        }
+
+        /// <summary>
+        /// Permite guardar una comunidad por medio del repositorio de datos
+        /// </summary>
+        /// <param Community="community">Comunidad que se va a guardar</param>
+        /// <returns> Si guardo la comunidad con exito o no </returns>
+        public async Task<bool> SetCommunity(Community community)
+        {
+            await _context.Communities.AddAsync(community);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

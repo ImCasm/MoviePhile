@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces.Repository;
 using Application.Common.Interfaces.Services;
+using Application.Dto;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,35 @@ namespace Application.Services
         public async Task<IEnumerable<Community>> GetCommunitiesName(string nameCommunity)
         {
             return await _repository.GetCommunitiesName(nameCommunity);
+        }
+
+        /// <summary>
+        /// Permite guardar una comunidad por medio del repositorio de datos
+        /// </summary>
+        /// <param Community="community">Comunidad que se va a guardar</param>
+        /// <returns>Retorna un true guardando la comunidad con exito</returns>
+        public async Task<bool> SetCommunity(Community community)
+        {
+            if (!await ExistCommunity(community.Name))
+            {
+                return false;
+            }
+            else
+            {
+                return await _repository.SetCommunity(community);
+            }
+            
+        }
+
+        /// <summary>
+        /// Permite buscar si la comunidad existe en la base de datos 
+        /// </summary>
+        /// <param string="name">Nombre la comunidad</param>
+        /// <returns>Retorna un false si la comunidad no existe</returns>
+        public async Task<bool> ExistCommunity(string name)
+        {
+           
+            return await _repository.GetCommunityByname(name) == null;
         }
     }
 }

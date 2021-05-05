@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dto;
+using Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,6 +16,18 @@ namespace Application.Common.Interfaces.Services
         Task<Community> GetCommunityByName(string name);
 
         Task<IEnumerable<Community>> GetCommunitiesName(string nameCommunity);
+
+        /// <summary>
+        /// Se crea la comunidad en la base de datos 
+        /// </summary>
+        /// <returns>True si guardo con exito o False que la comunidad ya existe</returns>
+        Task<bool> SetCommunity(Community community);
+
+        /// <summary>
+        /// Obtiene si la comunidad existe 
+        /// </summary>
+        /// <returns>True o false</returns>
+        Task<bool> ExistCommunity(string name);
 
     }
 }

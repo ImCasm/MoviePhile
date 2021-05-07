@@ -1,11 +1,7 @@
 ﻿using Application.Common.Interfaces.Repository;
 using Application.Common.Interfaces.Services;
-using Application.Dto;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -27,7 +23,6 @@ namespace Application.Services
         public async Task<Community> GetCommunityByName(string name)
         {
             return await _repository.GetCommunityByname(name);
-          
         }
 
         public async Task<IEnumerable<Community>> GetCommunitiesName(string nameCommunity)
@@ -50,7 +45,6 @@ namespace Application.Services
             {
                 return await _repository.SetCommunity(community);
             }
-            
         }
 
         /// <summary>
@@ -60,7 +54,6 @@ namespace Application.Services
         /// <returns>Retorna un false si la comunidad no existe</returns>
         public async Task<bool> ExistCommunity(string name)
         {
-           
             return await _repository.GetCommunityByname(name) == null;
         }
     }

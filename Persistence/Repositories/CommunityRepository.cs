@@ -9,7 +9,6 @@ namespace Persistence.Repositories
 {
     public class CommunityRepository : Repository<Community>, ICommunityRepository
     {
-
         private readonly MoviePhileDbContext _context;
 
         public CommunityRepository(MoviePhileDbContext context) : base(context)
@@ -32,7 +31,6 @@ namespace Persistence.Repositories
 
         public async Task<Community> GetCommunityByname(string name)
         {
-
             return (await _context.Communities
                 .Include(c => c.Publications)
                 .ThenInclude(p => p.Comments)
@@ -45,9 +43,7 @@ namespace Persistence.Repositories
 
         }
 
-        public async Task<IEnumerable<Community>> GetCommunitiesName(string nameCommunity)
-
-
+        public async Task<IEnumerable<Community>> GetCommunitiesName(string name)
         {
 
             return await _context.Communities
@@ -59,17 +55,15 @@ namespace Persistence.Repositories
                 .Include(c => c.Users)
                 .ThenInclude(u => u.User)
                 .Where(f => f.Name.ToUpper()
-                    .Contains(nameCommunity.ToUpper()) 
+                    .Contains(name.ToUpper()) 
                 )
                 .ToListAsync();
-
         }
-        public async Task<Community> Get_CommunityByname(string name)
-        {
 
+        public async Task<Community> GetCommunityByName(string name)
+        {
             return (await _context.Communities
                 .FirstOrDefaultAsync(f => f.Name == name));
-
         }
 
         /// <summary>

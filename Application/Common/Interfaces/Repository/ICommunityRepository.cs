@@ -25,7 +25,7 @@ namespace Application.Common.Interfaces.Repository
         /// Se obtiene que comunidades existen  
         /// </summary>
         /// <returns>Una comunidad</returns>
-        Task<Community> Get_CommunityByname(string name);
+        Task<Community> GetCommunityByName(string name);
      
 
     }

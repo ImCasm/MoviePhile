@@ -36,7 +36,7 @@ namespace Application.Services
         }
 
         /// <summary>
-        /// Permite guardar una comunidad por medio del repositorio de datos
+        /// Permite registrar una comunidad por medio del repositorio de datos
         /// </summary>
         /// <param Community="community">Comunidad que se va a guardar</param>
         /// <returns>Retorna un true guardando la comunidad con exito</returns>

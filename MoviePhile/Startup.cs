@@ -112,7 +112,8 @@ namespace MoviePhile
 
             services.AddHttpClient<IHttpMovieClient, HttpDataClient>(c =>
             {
-                c.BaseAddress = new Uri("https://api.themoviedb.org/3/");
+                string uri = "https://api.themoviedb.org/3/";
+                c.BaseAddress = new Uri(uri);
             });
 
             // Mapping for DTOs

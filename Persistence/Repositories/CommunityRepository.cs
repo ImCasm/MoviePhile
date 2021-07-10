@@ -45,20 +45,18 @@ namespace Persistence.Repositories
 
         }
 
-        public async Task<IEnumerable<Community>> GetCommunitiesName(string nameCommunity)
-
+        public async Task<IEnumerable<Community>> GetCommunitiesName(string name)
 
         {
 
             return await _context.Communities
                 .Include(c => c.Publications)
-                    .ThenInclude(p => p.Comments)
-                        .ThenInclude(c => c.User)
+                .ThenInclude(p => p.Comments)
+                .ThenInclude(c => c.User)
                 .Include(c => c.Users)
-                    .ThenInclude(u => u.Community)
-                        .Include(c => c.Users)
-                            .ThenInclude(u => u.User).Where(
-              f => f.Name.Contains(nameCommunity) )
+                .ThenInclude(u => u.Community)
+                .Include(c => c.Users)
+                .ThenInclude(u => u.User).Where(f => f.Name.Contains(name) )
                 .ToListAsync();
 
         }

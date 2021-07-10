@@ -25,7 +25,6 @@ namespace Persistence.Repositories
             await _context.FilmComments.AddAsync(filmComment);
 
             //otra forma de hacer las cosas
-            //base.Insert(filmComment);
             return await _context.SaveChangesAsync() > 0;
 
 

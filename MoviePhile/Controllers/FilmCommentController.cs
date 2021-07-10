@@ -31,7 +31,6 @@ namespace MoviePhile.Controllers
         public async Task<IActionResult> AllCommentFilm(int IdFilm)
         {
             var allFilmComment = await _filmCommentService.GetAllComment(IdFilm);
-            //return Ok(_mapper.Map<IEnumerable<FilmCommentDto>>(allFilmComment));
             return Ok(allFilmComment);
 
         }

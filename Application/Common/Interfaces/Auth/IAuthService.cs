@@ -8,6 +8,8 @@ namespace Application.Common.Interfaces.Auth
     {
         Task<AuthResponse> Login(UserLoginRequestDto user);
         Task<AuthResponse> Register(UserRegisterRequestDto user);
+
+       
         string GenerateJwtToken(IdentityUser user);
     }
 }

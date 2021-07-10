@@ -65,5 +65,11 @@ namespace Application.Services
         {
             return await _httpClientService.GetSeriesByName(query, page);
         }
+
+        public async Task<TvShow> InsertSerie(TvShow serie)
+        {
+            serie.Genre = null;
+            return await _serieRepository.InsertSerie(serie);
+        }
     }
 }

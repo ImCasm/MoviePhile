@@ -2,7 +2,6 @@
 using Application.Dto;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

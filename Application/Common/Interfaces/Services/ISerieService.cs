@@ -30,5 +30,12 @@ namespace Application.Common.Interfaces.Services
         /// <param name="id">Id de la serie</param>
         /// <returns>La serie encontrada</returns>
         Task<TvShow> GetSerieById(int id);
+
+        /// <summary>
+        /// Permite guardar una serie por medio del repositorio de datos
+        /// </summary>
+        /// <param name="movie">Serie que se va a guardar</param>
+        /// <returns>Serie guardada</returns>
+        Task<TvShow> InsertSerie(TvShow serie);
     }
 }

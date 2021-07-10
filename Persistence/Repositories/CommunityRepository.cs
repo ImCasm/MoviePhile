@@ -66,11 +66,6 @@ namespace Persistence.Repositories
                 .FirstOrDefaultAsync(f => f.Name == name));
         }
 
-        /// <summary>
-        /// Permite guardar una comunidad por medio del repositorio de datos
-        /// </summary>
-        /// <param Community="community">Comunidad que se va a guardar</param>
-        /// <returns> Si guardo la comunidad con exito o no </returns>
         public async Task<bool> SetCommunity(Community community)
         {
             await _context.Communities.AddAsync(community);

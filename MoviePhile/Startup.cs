@@ -83,6 +83,7 @@ namespace MoviePhile
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<ISerieRepository, SerieRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IPublicationRepository, PublicationRepository>();
             //filmcomment
             services.AddScoped<IFilmCommentRepository, FilmCommentRepository>();
 
@@ -96,6 +97,9 @@ namespace MoviePhile
 
             //filmcommentServicio
             services.AddScoped<IFilmCommentService, FilmCommentService>();
+
+            //Publicationservice
+            services.AddScoped<IPublicationService, PublicationService>();
 
 
             services.AddControllers();

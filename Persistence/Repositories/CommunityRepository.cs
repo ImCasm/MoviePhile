@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces.Repository;
+using Application.Dto;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -71,5 +72,36 @@ namespace Persistence.Repositories
             await _context.Communities.AddAsync(community);
             return await _context.SaveChangesAsync() > 0;
         }
+
+
+        public async Task<Community> GetCommunityById(int communityId)
+        {
+            return (await _context.Communities
+                .FirstAsync(f => f.Id == communityId));
+        }
+
+        public async Task<bool> SetRegisterUser(CommunityUser communityUser)
+        {
+            await _context.CommunityUsers.AddAsync(communityUser);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> SetDeleteUser(CommunityUser communityUser)
+        {
+
+            var query = (from y in _context.CommunityUsers where y.CommunityId == communityUser.CommunityId where y.CommunityId == communityUser.CommunityId select communityUser).First();
+
+            _context.Attach(query);
+            //DeleteObject is used to delete the entity object.  
+            _context.Remove(query);
+            return await _context.SaveChangesAsync() > 0;
+
+        }
+
+        public async Task<CommunityUser> UserExistInCommunity(CommunityUser communityUser)
+        {
+            return (await _context.CommunityUsers.FirstOrDefaultAsync(f => f.CommunityId == communityUser.CommunityId && f.UserId == communityUser.UserId));
+        }
+
     }
 }

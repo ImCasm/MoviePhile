@@ -20,7 +20,6 @@ namespace Persistence
         public DbSet<Community> Communities { get; set; }
         public DbSet<CommunityUser> CommunityUsers { get; set; }
 
-
         public MoviePhileDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -37,5 +37,24 @@ namespace Application.Common.Interfaces.Repository
         /// </summary>
         /// <returns>Una comunidad</returns>
         Task<Community> GetCommunityByName(string name);
+
+        ///<summary>
+        /// registra un usuario a una comunidad 
+        /// </summary>
+        /// <returns>true o false</returns>
+        Task<bool> SetRegisterUser(CommunityUser communityUser);
+
+        ///<summary>
+        /// registra un usuario a una comunidad 
+        /// </summary>
+        /// <returns>true o false</returns>
+        Task<bool> SetDeleteUser(CommunityUser communityUser);
+
+
+        Task<CommunityUser> UserExistInCommunity(CommunityUser communityUser);
+
+
+
+        Task<Community> GetCommunityById(int communityId);
     }
 }

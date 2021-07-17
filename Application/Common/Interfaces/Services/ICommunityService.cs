@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dto;
+using Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -37,5 +38,22 @@ namespace Application.Common.Interfaces.Services
         /// </summary>
         /// <returns>True o false</returns>
         Task<bool> ExistCommunity(string name);
+
+
+        Task<bool> CommunityExist(int communityId);
+
+        ///<summary>
+        /// registra un usuario a una comunidad 
+        /// </summary>
+        /// <returns>true o false</returns>
+        Task<bool> SetRegisterUser(CommunityUserDto communityUserDto);
+
+        ///<summary>
+        /// registra un usuario a una comunidad 
+        /// </summary>
+        /// <returns>true o false</returns>
+        Task<bool> SetDeleteUser(CommunityUserDto communityUserDto);
+
+        Task<bool> UserExistInCommunity(CommunityUser communityUser);
     }
 }

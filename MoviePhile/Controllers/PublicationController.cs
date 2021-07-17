@@ -23,8 +23,9 @@ namespace MoviePhile.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> CommentFilm([FromBody] Domain.Entities.Publication publication)
-        {
+        public async Task<IActionResult> AddPublication([FromBody] Domain.Entities.Publication publication)
+
+        {  
             return Ok(await _publicationService.SetPublication(publication));
         }
 

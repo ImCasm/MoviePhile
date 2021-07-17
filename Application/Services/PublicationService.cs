@@ -22,7 +22,11 @@ namespace Application.Services
         /// <returns></returns>
         public async Task<bool> SetPublication(Publication publication)
         {
-            return await _repository.SetPublication(publication);
+            if (publication.UserId != null) {
+                return await _repository.SetPublication(publication);
+
+            }
+            return false;
         }
     }
 }

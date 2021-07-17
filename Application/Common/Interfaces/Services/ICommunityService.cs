@@ -13,9 +13,19 @@ namespace Application.Common.Interfaces.Services
         /// <returns>Lista de comunidades</returns>
         Task<IEnumerable<Community>> GetCommunities();
 
+        /// <summary>
+        /// Permite obtener una comunidad por su nombre
+        /// </summary>
+        /// <param name="name">Nomrbe de la comunidad</param>
+        /// <returns>Información de la comunidad</returns>
         Task<Community> GetCommunityByName(string name);
 
-        Task<IEnumerable<Community>> GetCommunitiesName(string nameCommunity);
+        /// <summary>
+        /// Obtiene una lista de comunidades que coinciden con un nombre
+        /// </summary>
+        /// <param name="name">Nombre de la comunidad</param>
+        /// <returns>Lista de comunidades que coinciden con el nombre buscado</returns>
+        Task<IEnumerable<Community>> GetCommunitiesName(string name);
 
         public Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity);
         /// <summary>
@@ -30,5 +40,21 @@ namespace Application.Common.Interfaces.Services
         /// <returns>True o false</returns>
         Task<bool> ExistCommunity(string name);
 
+
+        Task<bool> CommunityExist(int communityId);
+
+        ///<summary>
+        /// registra un usuario a una comunidad 
+        /// </summary>
+        /// <returns>true o false</returns>
+        Task<bool> SetRegisterUser(CommunityUserDto communityUserDto);
+
+        ///<summary>
+        /// registra un usuario a una comunidad 
+        /// </summary>
+        /// <returns>true o false</returns>
+        Task<bool> SetDeleteUser(CommunityUserDto communityUserDto);
+
+        Task<bool> UserExistInCommunity(CommunityUser communityUser);
     }
 }

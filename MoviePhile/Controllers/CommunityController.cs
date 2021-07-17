@@ -66,6 +66,24 @@ namespace MoviePhile.Controllers
         {
             return Ok(await _communityService.SetCommunity(community));
         }
+
+
+
+
+        [HttpPost]
+        [Route("RegisterUser")]
+        public async Task<IActionResult> RegisterUser([FromBody] CommunityUserDto communityUserDto)
+        {
+            return Ok( await _communityService.SetRegisterUser(communityUserDto));
+        }
+
+
+        [HttpDelete]
+        [Route("RegisterUser")]
+        public async Task<IActionResult> DeleteUser([FromBody] CommunityUserDto communityUserDto)
+        {
+            return Ok(await _communityService.SetDeleteUser(communityUserDto));
+        }
     }
     
 }

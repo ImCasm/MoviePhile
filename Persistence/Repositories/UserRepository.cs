@@ -34,5 +34,14 @@ namespace Persistence.Repositories
         {
             return await _userManager.CreateAsync(user, password);
         }
+
+        public async Task<User> FindById(string id)
+        {
+            return await _userManager.FindByIdAsync(id);
+        }
+        public async Task<bool> UserIdExists(string id)
+        {
+            return await FindById(id) != null;
+        }
     }
 }

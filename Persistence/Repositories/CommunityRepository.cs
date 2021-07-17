@@ -67,42 +67,17 @@ namespace Persistence.Repositories
                 .FirstOrDefaultAsync(f => f.Name == name));
         }
 
-<<<<<<< HEAD
-        /// <summary>
-        /// Permite buscar la comunidad en la base de datos
-        /// </summary>
-        /// <param id="IdCommunity"></param>
-        /// <returns> Retorna una lista de la comunidad que se obtiene con el id</returns>
-        public async Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity) {
-            return await _context.Communities
-                .Include(c => c.Publications)
-                .ThenInclude(p => p.Comments)
-                .ThenInclude(c => c.User)
-                .Include(c => c.Users)
-                .ThenInclude(u => u.Community)
-                .Include(c => c.Users)
-                .ThenInclude(u => u.User)
-                .Where(f => f.Id == IdCommunity)
-                .ToListAsync();
-
-        }
-
         /// <summary>
         /// Permite guardar una comunidad por medio del repositorio de datos
         /// </summary>
         /// <param Community="community">Comunidad que se va a guardar</param>
         /// <returns> Si guardo la comunidad con exito o no </returns>
-=======
->>>>>>> 57149da41e0e0b81b171305eec1b9909606cab0b
         public async Task<bool> SetCommunity(Community community)
         {
             await _context.Communities.AddAsync(community);
             return await _context.SaveChangesAsync() > 0;
         }
 
-<<<<<<< HEAD
-       
-=======
 
         public async Task<Community> GetCommunityById(int communityId)
         {
@@ -132,7 +107,6 @@ namespace Persistence.Repositories
         {
             return (await _context.CommunityUsers.FirstOrDefaultAsync(f => f.CommunityId == communityUser.CommunityId && f.UserId == communityUser.UserId));
         }
->>>>>>> 57149da41e0e0b81b171305eec1b9909606cab0b
 
     }
 }

@@ -19,16 +19,13 @@ namespace Application.Common.Interfaces.Repository
         /// <returns>Información de la comunidad</returns>
         Task<Community> GetCommunityByname(string name);
 
-<<<<<<< HEAD
-        public Task<IEnumerable<Community>> GetCommunitiesName(string name);
-=======
         /// <summary>
         /// Obtiene una lista de comunidades de la base de datos que coinciden con un nombre
         /// </summary>
         /// <param name="name">Nombre de la comunidad</param>
         /// <returns>Lista de comunidades que coinciden con el nombre buscado</returns>
         Task<IEnumerable<Community>> GetCommunitiesName(string name);
->>>>>>> 57149da41e0e0b81b171305eec1b9909606cab0b
+        public Task<IEnumerable<Community>> GetCommunitiesName(string name);
 
         /// <summary>
         /// Se guarda la comunidad en la base de datos 
@@ -40,17 +37,6 @@ namespace Application.Common.Interfaces.Repository
         /// Se obtiene que comunidades existen  
         /// </summary>
         /// <returns>Una comunidad</returns>
-<<<<<<< HEAD
-        public Task<Community> GetCommunityByName(string name);
-
-        /// <summary>
-        /// Permite buscar obtener la informacion de las comunidades registradas
-        /// </summary>
-        /// <param Id="IdcCommunity">Con este id se puede obtener la comunidad</param>
-        /// <returns>Retorna la comunidad que esta registrada</returns>
-        public Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity);
-       
-=======
         Task<Community> GetCommunityByName(string name);
 
         ///<summary>
@@ -71,6 +57,5 @@ namespace Application.Common.Interfaces.Repository
 
 
         Task<Community> GetCommunityById(int communityId);
->>>>>>> 57149da41e0e0b81b171305eec1b9909606cab0b
     }
 }

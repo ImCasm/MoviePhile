@@ -11,10 +11,8 @@ namespace Domain.Entities
         public DateTime Date { get; set; }
         public string UserId { get; set; }
         public int CommunityId { get; set; }
-
         public ICollection<PublicationComment> Comments { get; set; }
         public Community Community { get; set; }
         public User User { get; set; }
-
     }
 }

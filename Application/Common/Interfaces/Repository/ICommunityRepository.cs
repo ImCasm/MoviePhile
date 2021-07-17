@@ -13,7 +13,7 @@ namespace Application.Common.Interfaces.Repository
         Task<IEnumerable<Community>> GetCommunities();
         Task<Community> GetCommunityByname(string name);
 
-        Task<IEnumerable<Community>> GetCommunitiesName(string name);
+        public Task<IEnumerable<Community>> GetCommunitiesName(string name);
 
         /// <summary>
         /// Se guarda la comunidad en la base de datos 
@@ -25,8 +25,14 @@ namespace Application.Common.Interfaces.Repository
         /// Se obtiene que comunidades existen  
         /// </summary>
         /// <returns>Una comunidad</returns>
-        Task<Community> GetCommunityByName(string name);
-     
+        public Task<Community> GetCommunityByName(string name);
 
+        /// <summary>
+        /// Permite buscar obtener la informacion de las comunidades registradas
+        /// </summary>
+        /// <param Id="IdcCommunity">Con este id se puede obtener la comunidad</param>
+        /// <returns>Retorna la comunidad que esta registrada</returns>
+        public Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity);
+       
     }
 }

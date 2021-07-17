@@ -33,21 +33,32 @@ namespace MoviePhile.Controllers
             return Ok(_mapper.Map<IEnumerable<CommunityDto>>(communities));
         }
 
-        /**
-        [HttpGet("{name}")]
+        
+        /*[HttpGet("{name}")]
         public async Task<ActionResult> GetByName(string name)
         {
             var comunitie = await _communityService.GetCommunityByName(name);
             return Ok(_mapper.Map<CommunityDto>(comunitie));
-        }
-        **/       
+        }*/
+             
 
-        [HttpGet("{nameCommunity}")]
-        public async Task<ActionResult> GetAllByName(string nameCommunity)
+        [HttpGet]
+        [Route("AllComunity")]
+        public async Task<IActionResult> GetAllCommunity(string nameCommunity)
         {
             var communities = await _communityService.GetCommunitiesName(nameCommunity);
             return Ok(_mapper.Map<IEnumerable<CommunityDto>>(communities));
+            
         }
+
+        [HttpGet]
+        [Route("InformationCommunity")]
+        public async Task<IActionResult> GetInformationCommunity(int IdCommunity)
+        {
+            var informationCommunity = await _communityService.GetInformationCommunity(IdCommunity);
+            return Ok(_mapper.Map<IEnumerable<CommunityDto>>(informationCommunity));
+        }
+
 
         [HttpPost]
         [Route("RegisterCommunity")]

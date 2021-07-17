@@ -17,6 +17,7 @@ namespace Application.Common.Interfaces.Services
 
         Task<IEnumerable<Community>> GetCommunitiesName(string nameCommunity);
 
+        public Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity);
         /// <summary>
         /// Se crea la comunidad en la base de datos 
         /// </summary>

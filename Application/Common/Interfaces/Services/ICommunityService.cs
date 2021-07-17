@@ -27,7 +27,7 @@ namespace Application.Common.Interfaces.Services
         /// <returns>Lista de comunidades que coinciden con el nombre buscado</returns>
         Task<IEnumerable<Community>> GetCommunitiesName(string name);
 
-        public Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity);
+        Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity);
         /// <summary>
         /// Se crea la comunidad en la base de datos 
         /// </summary>

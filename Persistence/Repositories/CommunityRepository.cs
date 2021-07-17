@@ -108,5 +108,20 @@ namespace Persistence.Repositories
             return (await _context.CommunityUsers.FirstOrDefaultAsync(f => f.CommunityId == communityUser.CommunityId && f.UserId == communityUser.UserId));
         }
 
+        public async Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity)
+        {
+            return await _context.Communities
+                .Include(c => c.Publications)
+                .ThenInclude(p => p.Comments)
+                .ThenInclude(c => c.User)
+                .Include(c => c.Users)
+                .ThenInclude(u => u.Community)
+                .Include(c => c.Users)
+                .ThenInclude(u => u.User)
+                .Where(f => f.Id == IdCommunity)
+                .ToListAsync();
+                
+              
+        }
     }
 }

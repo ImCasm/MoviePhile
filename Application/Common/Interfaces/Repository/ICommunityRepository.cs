@@ -25,8 +25,7 @@ namespace Application.Common.Interfaces.Repository
         /// <param name="name">Nombre de la comunidad</param>
         /// <returns>Lista de comunidades que coinciden con el nombre buscado</returns>
         Task<IEnumerable<Community>> GetCommunitiesName(string name);
-        public Task<IEnumerable<Community>> GetCommunitiesName(string name);
-
+      
         /// <summary>
         /// Se guarda la comunidad en la base de datos 
         /// </summary>
@@ -54,7 +53,7 @@ namespace Application.Common.Interfaces.Repository
 
         Task<CommunityUser> UserExistInCommunity(CommunityUser communityUser);
 
-
+        Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity);
 
         Task<Community> GetCommunityById(int communityId);
     }

@@ -36,5 +36,7 @@ namespace Application.Common.Interfaces.Auth
         /// <param name="password">Contraseña del usuario</param>
         /// <returns></returns>
         Task<IdentityResult> CreateUser(User user, string password);
+
+        Task<bool> UserIdExists(string id);
     }
 }

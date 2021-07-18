@@ -56,5 +56,12 @@ namespace Application.Common.Interfaces.Services
         Task<bool> SetDeleteUser(CommunityUserDto communityUserDto);
 
         Task<bool> UserExistInCommunity(CommunityUser communityUser);
+
+        /// <summary>
+        /// Obtiene una comunidad por id
+        /// </summary>
+        /// <param name="communityId">id de la comunidad que se busca</param>
+        /// <returns>La comunidad que se encuentra, si no existe null</returns>
+        Task<Community> GetCommunityById(int communityId);
     }
 }

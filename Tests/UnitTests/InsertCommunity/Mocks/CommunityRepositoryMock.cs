@@ -31,6 +31,23 @@ namespace Tests.UnitTests.InsertCommunity.Mocks
         {
             SetupGetCommunityByname();
             SetupSetCommunity();
+            SetupSetRegisterUser();
+            SetupUserExistInCommunity();
+        }
+
+        public void SetupUserExistInCommunity()
+        {
+            Setup(x => x.UserExistInCommunity(It.Is<CommunityUser>(cu => cu.UserId == "1")))
+                .Returns(Task.FromResult(new CommunityUser { UserId = "1" }));
+
+            Setup(x => x.UserExistInCommunity(It.Is<CommunityUser>(cu => cu.UserId != "1")))
+                .Returns(Task.FromResult(default(CommunityUser)));
+        }
+
+        public void SetupSetRegisterUser()
+        {
+            Setup(x => x.SetRegisterUser(It.IsAny<CommunityUser>()))
+               .Returns(Task.FromResult(true));
         }
     }
 }

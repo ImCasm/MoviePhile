@@ -53,6 +53,13 @@ namespace Tests.UnitTests.Login.Mocks
             SetupCheckCredentials();
             SetupFindByEmail();
             SetupUserExists();
+            SetupUserIdExist();
+        }
+
+        public void SetupUserIdExist()
+        {
+            Setup(x => x.UserIdExists(It.IsAny<string>()))
+               .Returns(Task.FromResult(true));
         }
     }
 }

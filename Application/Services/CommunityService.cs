@@ -103,5 +103,10 @@ namespace Application.Services
         {
             return await _repository.SetDeleteUser(new CommunityUser() { CommunityId = communityUserDto.CommunityId, UserId = communityUserDto.UserId });
         }
+
+        public async Task<Community> GetCommunityById(int communityId)
+        {
+            return await _repository.GetCommunityById(communityId);
+        }
     }
 }

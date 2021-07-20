@@ -79,11 +79,27 @@ namespace MoviePhile.Controllers
 
 
         [HttpDelete]
-        [Route("RegisterUser")]
+        [Route("DeleteUser")]
         public async Task<IActionResult> DeleteUser([FromBody] CommunityUserDto communityUserDto)
         {
             return Ok(await _communityService.SetDeleteUser(communityUserDto));
         }
+
+        [HttpGet]
+        [Route("GetUserId")]
+        public async Task<IActionResult> GetUserId(int communityId, string userId)
+        {
+            var newRegisterUsert = new CommunityUser() { CommunityId = communityId, UserId = userId };
+
+            return Ok(await _communityService.UserExistInCommunity(newRegisterUsert));
+        }
+        /*
+        [HttpGet]
+        [Route("GetCommunity")]
+        public async Task<IActionResult> GetCommunityId(int communityId)
+        {
+           return Ok(await _communityService.CommunityExist(communityId));
+        }*/
     }
     
 }

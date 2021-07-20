@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces.Auth;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 using System.Threading.Tasks;
 
@@ -48,12 +49,19 @@ namespace Tests.UnitTests.Login.Mocks
               .Returns(Task.FromResult(true));
         }
 
+        public void SetupCreateUser()
+        {
+            Setup(x => x.CreateUser(It.IsAny<User>(),It.IsAny<string>()))
+              .Returns(Task.FromResult(IdentityResult.Success));
+        }
+
         private void SetupMethods()
         {
             SetupCheckCredentials();
             SetupFindByEmail();
             SetupUserExists();
             SetupUserIdExist();
+            SetupCreateUser();
         }
 
         public void SetupUserIdExist()

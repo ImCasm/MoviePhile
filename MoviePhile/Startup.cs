@@ -36,7 +36,6 @@ namespace MoviePhile
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -48,7 +47,7 @@ namespace MoviePhile
                 opt => opt.UseSqlServer(Configuration.GetConnectionString("AzureConnection")
             ));
 
-            // within this section we are configuring the authentication and setting the default scheme
+            #region autenticación
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,13 +69,14 @@ namespace MoviePhile
                     ValidateLifetime = true
                 };
             });
+            #endregion
 
             services
                .AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                .AddRoles<IdentityRole>()
                .AddEntityFrameworkStores<MoviePhileDbContext>();
 
-            // Inyección de Repositorios
+            #region Inyeccion de repositorios
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICommunityRepository, CommunityRepository>();
@@ -84,23 +84,23 @@ namespace MoviePhile
             services.AddScoped<ISerieRepository, SerieRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IPublicationRepository, PublicationRepository>();
-            //filmcomment
             services.AddScoped<IFilmCommentRepository, FilmCommentRepository>();
+            services.AddScoped<IAdvertisingRepository, AdvertisingRepository>();
+            services.AddScoped<IPaymentsRepository, PaymentsRepository>();
+            #endregion
 
-            // Inyección de Servicios
+            #region Inyeccion de servicios
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IHttpMovieClientService, HttpMovieClientService>();
             services.AddScoped<ICommunityService, CommunityService>();
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<ISerieService, SerieService>();
             services.AddScoped<IGenreService, GenreService>();
-
-            //filmcommentServicio
+            services.AddScoped<IAdvertisingService, AdvertisingService>();
             services.AddScoped<IFilmCommentService, FilmCommentService>();
-
-            //Publicationservice
             services.AddScoped<IPublicationService, PublicationService>();
-
+            services.AddScoped<IPaymentsService, PaymentsTestService>();
+            #endregion
 
             services.AddControllers();
 

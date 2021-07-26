@@ -28,7 +28,7 @@ namespace Application.Services
         /// <returns></returns>
         public async Task<bool> SetPublication(Publication publication)
         {
-            if (await _userRepository.UserIdExists(publication.UserId))
+            if (await _userRepository.UserIdExists(publication.UserId) )
             {
                 return await _repository.SetPublication(publication);
             }

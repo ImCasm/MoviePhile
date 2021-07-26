@@ -2,6 +2,7 @@
 using Application.Dto;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -82,7 +83,7 @@ namespace Persistence.Repositories
         public async Task<Community> GetCommunityById(int communityId)
         {
             return (await _context.Communities
-                .FirstAsync(f => f.Id == communityId));
+                .FirstOrDefaultAsync(f => f.Id == communityId));
         }
 
         public async Task<bool> SetRegisterUser(CommunityUser communityUser)
@@ -94,12 +95,19 @@ namespace Persistence.Repositories
         public async Task<bool> SetDeleteUser(CommunityUser communityUser)
         {
 
-            var query = (from y in _context.CommunityUsers where y.CommunityId == communityUser.CommunityId where y.CommunityId == communityUser.CommunityId select communityUser).First();
+            try
+            {
+                var query = (from y in _context.CommunityUsers where y.CommunityId == communityUser.CommunityId where y.CommunityId == communityUser.CommunityId select communityUser).First();
 
-            _context.Attach(query);
-            //DeleteObject is used to delete the entity object.  
-            _context.Remove(query);
-            return await _context.SaveChangesAsync() > 0;
+                _context.Attach(query);
+                //DeleteObject is used to delete the entity object.  
+                _context.Remove(query);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
 
         }
 
@@ -120,8 +128,6 @@ namespace Persistence.Repositories
                 .ThenInclude(u => u.User)
                 .Where(f => f.Id == IdCommunity)
                 .ToListAsync();
-                
-              
         }
 
         public async Task<Community> GetInformationCommunityid(int IdCommunity)

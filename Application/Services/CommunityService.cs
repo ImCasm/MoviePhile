@@ -74,29 +74,29 @@ namespace Application.Services
 
         public async Task<bool> UserExistInCommunity(CommunityUser communityUser)
         {
-            return await _repository.UserExistInCommunity(communityUser) == null;
+            return await _repository.UserExistInCommunity(communityUser) != null;
         }
 
         public async Task<bool> CommunityExist(int communityId)
         {
             
-            return await _repository.GetCommunityById(communityId) == null;
+            return await _repository.GetCommunityById(communityId) != null;
         }
 
 
         public async Task<bool> SetRegisterUser(CommunityUserDto communityUserDto)
         {
             var newRegisterUser = new CommunityUser() { CommunityId = communityUserDto.CommunityId, UserId = communityUserDto.UserId };
-            if (!await UserExistInCommunity(newRegisterUser))
+            if (await UserExistInCommunity(newRegisterUser))
             {
                 return false;
             }else if (!await _userRepository.UserIdExists(newRegisterUser.UserId))
             {
                 return false;
-            }/*else if(!await CommunityExist(newRegisterUser.CommunityId)){
+            }else if(!await CommunityExist(newRegisterUser.CommunityId)){
                 
                 return false;
-            }*/
+            }
             else
             {
               return await _repository.SetRegisterUser(newRegisterUser);

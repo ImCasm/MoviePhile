@@ -26,7 +26,7 @@ namespace Tests.UnitTests.AddUserToCommunity
         public async void AddNewUser()
         {
             // Arrange
-            CommunityUserDto communityUser = new CommunityUserDto { CommunityId = 2, UserId = "2" };
+            CommunityUserDto communityUser = new CommunityUserDto { CommunityId = 1, UserId = "2" };
 
             // Act
             bool result = await communityService.SetRegisterUser(communityUser);

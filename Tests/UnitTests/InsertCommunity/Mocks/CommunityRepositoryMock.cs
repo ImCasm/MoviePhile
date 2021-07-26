@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces.Repository;
 using Domain.Entities;
 using Moq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Tests.UnitTests.InsertCommunity.Mocks
@@ -33,6 +34,7 @@ namespace Tests.UnitTests.InsertCommunity.Mocks
             SetupSetCommunity();
             SetupSetRegisterUser();
             SetupUserExistInCommunity();
+            SetupGetCommunityById();
         }
 
         public void SetupUserExistInCommunity()
@@ -48,6 +50,15 @@ namespace Tests.UnitTests.InsertCommunity.Mocks
         {
             Setup(x => x.SetRegisterUser(It.IsAny<CommunityUser>()))
                .Returns(Task.FromResult(true));
+        }
+
+        public void SetupGetCommunityById()
+        {
+            Setup(x => x.GetCommunityById(It.Is<int>(id => id == 1)))
+                .Returns(Task.FromResult(new Community { Id = 1 }));
+
+            Setup(x => x.GetCommunityById(It.Is<int>(id => id != 1)))
+                .Returns(Task.FromResult(default(Community)));
         }
     }
 }

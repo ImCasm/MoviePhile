@@ -123,5 +123,19 @@ namespace Persistence.Repositories
                 
               
         }
+
+        public async Task<Community> GetInformationCommunityid(int IdCommunity)
+        {
+            return (await _context.Communities
+                .Include(c => c.Publications)
+                .ThenInclude(p => p.Comments)
+                .ThenInclude(c => c.User)
+                .Include(c => c.Users)
+                .ThenInclude(u => u.Community)
+                .Include(c => c.Users)
+                .ThenInclude(u => u.User)
+                .FirstOrDefaultAsync(f => f.Id == IdCommunity));
+
+        }
     }
 }

@@ -38,6 +38,10 @@ namespace Application.Services
         {
             return await _repository.GetInformationCommunity(IdCommunity);
         }
+        public async Task<Community> GetInformationCommunityid(int IdCommunity)
+        {
+            return await _repository.GetInformationCommunityid(IdCommunity);
+        }
         /// <summary>
         /// Permite registrar una comunidad por medio del repositorio de datos
         /// </summary>

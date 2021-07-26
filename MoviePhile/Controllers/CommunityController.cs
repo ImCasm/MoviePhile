@@ -53,10 +53,10 @@ namespace MoviePhile.Controllers
 
         [HttpGet]
         [Route("InformationCommunity")]
-        public async Task<IActionResult> GetInformationCommunity(int IdCommunity)
+        public async Task<ActionResult> GetInformationCommunity(int IdCommunity)
         {
-            var informationCommunity = await _communityService.GetInformationCommunity(IdCommunity);
-            return Ok(_mapper.Map<IEnumerable<CommunityDto>>(informationCommunity));
+            var informationCommunity = await _communityService.GetInformationCommunityid(IdCommunity);
+            return Ok(_mapper.Map<CommunityDto>(informationCommunity));
         }
 
 

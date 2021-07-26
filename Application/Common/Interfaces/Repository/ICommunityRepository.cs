@@ -55,6 +55,9 @@ namespace Application.Common.Interfaces.Repository
 
         Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity);
 
+        Task<Community> GetInformationCommunityid(int IdCommunity);
+
         Task<Community> GetCommunityById(int communityId);
+
     }
 }

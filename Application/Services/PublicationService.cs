@@ -28,7 +28,7 @@ namespace Application.Services
         /// <returns></returns>
         public async Task<bool> SetPublication(Publication publication)
         {
-            if (await _userRepository.UserIdExists(publication.UserId) )
+            if (await _userRepository.UserIdExists(publication.UserId) && publication.Content != null)
             {
                 return await _repository.SetPublication(publication);
             }
@@ -36,7 +36,7 @@ namespace Application.Services
             throw new HandlerException(
                 HttpStatusCode.NotFound,
                 new List<string>() {
-                        "Usuario no encontrado, por favor registrese"
+                        "No fue posible realizar la publicación"
                 }
             );
       

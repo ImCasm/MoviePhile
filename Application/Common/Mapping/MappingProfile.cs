@@ -23,6 +23,7 @@ namespace Domain.Common.Mapping
             CreateMap<Movie, MovieDto>()
                 .ForMember(movieDto => movieDto.Genre, opt => opt.MapFrom(movie => movie.Genre))
                 .ForMember(movieDto => movieDto.Comments, opt => opt.MapFrom(genre => genre.Comments))
+                .ForMember(movieDto => movieDto.Score, opt => opt.MapFrom(movie => movie.Scores.ToList().Average(x => x.Value)))
                 .IncludeBase<Film, FilmDto>();
 
             CreateMap<TvShow, TvShowDto>()
@@ -43,6 +44,9 @@ namespace Domain.Common.Mapping
 
             CreateMap<PublicationComment, PublicationCommentDto>()
                 .ForMember(pubCommentDto => pubCommentDto.User, opt => opt.MapFrom(pubComment => pubComment.User));
+
+            CreateMap<Score, ScoreDto>();
+              
 
         }
     }

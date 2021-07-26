@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,8 @@ namespace Application.Dto
 
         public GenreDto Genre { get; set; }
         public ICollection<FilmCommentDto> Comments { get; set; }
+
+        public float Score { get; set; }
+
     }
 }

@@ -16,5 +16,7 @@ namespace Domain.Entities
 
         public Genre Genre { get; set; }
         public ICollection<FilmComment> Comments { get; set; }
+        public ICollection<Score> Scores{ get; set; }
+
     }
 }

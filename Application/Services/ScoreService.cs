@@ -17,11 +17,13 @@ namespace Application.Services
 
         private readonly IScoreRepository _repository;
         private readonly IUserRepository _userRepository;
+        private readonly IMovieService _movieService;
 
-        public ScoreService(IScoreRepository repository, IUserRepository authRepository)
+        public ScoreService(IScoreRepository repository, IUserRepository authRepository, IMovieService movieService)
         {
             _repository = repository;
             _userRepository = authRepository;
+            _movieService = movieService;
 
         }
 
@@ -45,6 +47,12 @@ namespace Application.Services
               }
               );
             }
+            if (!await _movieService.ExistMovieOnDb(score.FilmId))
+            {
+                Movie movie = await _movieService.GetMovieById(score.FilmId);
+                await _movieService.InsertMovie(movie);
+            }
+
             return await _repository.setScore(score);
         }
     }

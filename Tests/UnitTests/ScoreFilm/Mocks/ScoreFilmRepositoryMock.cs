@@ -13,10 +13,10 @@ namespace Tests.UnitTests.ScoreFilm.Mocks
     {
 
         public ScoreFilmRepositoryMock() {
-            setupMethods();
+            SetupMethods();
         }
 
-        public void setupSetScore()
+        public void SetupSetScore()
         {
         
             
@@ -29,9 +29,9 @@ namespace Tests.UnitTests.ScoreFilm.Mocks
 
 
 
-        private void setupMethods()
+        private void SetupMethods()
         {
-            setupSetScore();
+            SetupSetScore();
         }
 
     }

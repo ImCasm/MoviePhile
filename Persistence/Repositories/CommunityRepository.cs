@@ -104,7 +104,7 @@ namespace Persistence.Repositories
                 _context.Remove(query);
                 return await _context.SaveChangesAsync() > 0;
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return false;
             }

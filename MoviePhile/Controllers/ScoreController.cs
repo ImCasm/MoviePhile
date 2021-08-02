@@ -14,11 +14,11 @@ namespace MoviePhile.Controllers
     public class ScoreController: ControllerBase
     {
         private readonly IScoreService _scoreService;
-        private readonly IMapper _mapper;
-        public ScoreController(IScoreService score, IMapper mapper)
+
+        public ScoreController(IScoreService score)
         {
             _scoreService = score;
-            _mapper = mapper;
+         
         }
 
         [HttpPost]

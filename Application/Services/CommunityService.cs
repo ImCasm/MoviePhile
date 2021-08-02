@@ -29,9 +29,9 @@ namespace Application.Services
             return await _repository.GetCommunityByname(name);
         }
 
-        public async Task<IEnumerable<Community>> GetCommunitiesName(string nameCommunity)
+        public async Task<IEnumerable<Community>> GetCommunitiesName(string name)
         {
-            return await _repository.GetCommunitiesName(nameCommunity);
+            return await _repository.GetCommunitiesName(name);
         }
       
         public async Task<IEnumerable<Community>> GetInformationCommunity(int IdCommunity)

@@ -34,12 +34,7 @@ namespace MoviePhile.Controllers
         }
 
         
-        /*[HttpGet("{name}")]
-        public async Task<ActionResult> GetByName(string name)
-        {
-            var comunitie = await _communityService.GetCommunityByName(name);
-            return Ok(_mapper.Map<CommunityDto>(comunitie));
-        }*/
+        
              
 
         [HttpGet]
@@ -93,13 +88,7 @@ namespace MoviePhile.Controllers
 
             return Ok(await _communityService.UserExistInCommunity(newRegisterUsert));
         }
-        /*
-        [HttpGet]
-        [Route("GetCommunity")]
-        public async Task<IActionResult> GetCommunityId(int communityId)
-        {
-           return Ok(await _communityService.CommunityExist(communityId));
-        }*/
+        
     }
     
 }

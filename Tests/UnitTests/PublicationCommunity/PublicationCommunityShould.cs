@@ -29,7 +29,7 @@ namespace Tests.UnitTests.PublicationCommunity
         }
         
         [Fact]
-        public async void publicationContentIsEmpty()
+        public async void PublicationContentIsEmpty()
         {
             // Arrange
             bool PublicationResponse;

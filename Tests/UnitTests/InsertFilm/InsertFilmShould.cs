@@ -50,10 +50,7 @@ namespace Tests.UnitTests.InsertFilm
         [Fact]
         public async void InsertFilmError()
         {
-            // Arrange
-            Movie movie;
-
-            // Act
+          
 
             //Assert
             await Assert.ThrowsAnyAsync<HandlerException>(() => movieService.InsertMovie( new Movie() {Id = 3}));

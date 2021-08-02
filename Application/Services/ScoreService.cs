@@ -30,7 +30,7 @@ namespace Application.Services
 
         public async Task<bool> setScore(Score score)
         {
-            if(score.Value < 1 | score.Value > 5){
+            if(score.Value < 1 || score.Value > 5){
                 throw new HandlerException(
                HttpStatusCode.NotFound,
                new List<string>() {
